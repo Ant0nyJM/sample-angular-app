@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-3 offset-3">
+        <div class="mx-auto">
+        <img *ngIf="product.image" src="{{ product.image}}" class="img-fluid" style="max-width: 100%; height: auto;">
+        <img *ngIf="!product.image" src="https://images.squarespace-cdn.com/content/v1/55fc0004e4b069a519961e2d/1442590746571-RPGKIXWGOO671REUNMCB/ke17ZwdGBToddI8pDm48kKVo6eXXpUnmuNsFtLxYNDVZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7abfyk2s94xLLkDA7TSo2rckMlGDU48FfF-V7lLcSuGNU_Uf7d6wOiJwP-LWX64gbQ/image-asset.gif" class="img-fluid" style="max-width: 100%; height: auto;">
+    </div>
+    </div>
+    <div class="col-3">
+         <table class="table table-borderless">
+             <tr>
+                 <td>Name :</td>
+                 <td>{{ product.name }}</td>
+             </tr>
+             <tr>
+                <td>Description :</td>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <td>Rating</td>
+                <td>{{ product.rating }}</td>
+            </tr>
+            <tr>
+
+                <td>
+                    <button *ngIf="!addedToCart" id="shopping-cart" class="btn" title="Add to cart" (click)="addToCart()"><i class="fa fa-shopping-cart fa-2x" style="color: green;"></i></button>
+                    <button *ngIf="addedToCart" id="shopping-cart-remove" class="btn" title="Remove from cart" (click)="removeFromCart()"><i class="fa fa-times-circle fa-2x" style="color: red;"></i></button>
+                </td>
+            </tr>
+         </table>
+    </div>
+</div>

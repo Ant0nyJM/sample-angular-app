@@ -1,0 +1,46 @@
+<div class="col-10 mx-auto">
+<div class="row border rounded p-2 m-2" *ngFor="let product of cartService.products">
+    <div class="col-2">
+        <img *ngIf="product.image" src="{{ product.image}}" class="img-fluid" style="max-width: 100%; height: auto;">
+        <img *ngIf="!product.image" src="https://images.squarespace-cdn.com/content/v1/55fc0004e4b069a519961e2d/1442590746571-RPGKIXWGOO671REUNMCB/ke17ZwdGBToddI8pDm48kKVo6eXXpUnmuNsFtLxYNDVZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7abfyk2s94xLLkDA7TSo2rckMlGDU48FfF-V7lLcSuGNU_Uf7d6wOiJwP-LWX64gbQ/image-asset.gif" class="img-fluid" style="max-width: 100%; height: auto;">
+    </div>
+    <div class="col-8">
+        <div class="row border-bottom">
+            <h3>{{ product.name }}</h3>
+        </div>
+        <div class="row mt-1">
+            <p><b>Description : </b>{{ product.description }}</p>
+        </div>
+        <div class="row">
+            <small>
+                <i *ngIf="product.rating">This product has a rating of {{ product.rating }}</i>
+                <i *ngIf="!product.rating">This product has not been rated</i>
+            </small>
+        </div>
+        <!-- <table class="table table-sm">
+            <tr>
+                <td>Name</td>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <td>Rating</td>
+                <td>
+                    <small>
+                        <i *ngIf="product.rating">This product has a rating of {{ product.rating }}</i>
+                        <i *ngIf="!product.rating">This product has not been rated</i>
+                    </small>
+                </td>
+            </tr>
+        </table> -->
+
+    </div>
+    <div class="col-2">
+        <button title="Remove from cart" class="btn" (click)="cartService.removeFromCart(product)"><i class="fa fa-trash fa-2x" style="color: red;"></i></button>
+        
+    </div>
+</div>
+</div>
