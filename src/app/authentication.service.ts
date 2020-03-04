@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
-import { EmailValidator } from '@angular/forms';
+import { urls } from './urls.json'
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -11,18 +11,7 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
 
-    public loggedIn = false;
-
-    private loginUrl = "https://angular-backend-sayone.herokuapp.com/api/v1/rest-auth/login/"
-
-    constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUser = this.currentUserSubject.asObservable();
-    }
-
-    public get currentUserValue() {
-        return this.currentUserSubject.value;
-    }
+    public loggedIn : boolean;
 
     httpOptions = {
       headers: new HttpHeaders({
@@ -30,18 +19,36 @@ export class AuthenticationService {
       })
     };
 
+    constructor(private http: HttpClient) {
+        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUser = this.currentUserSubject.asObservable();
+        if(this.currentUserSubject.value){
+          this.loggedIn = true;
+        }
+        else{
+          this.loggedIn = false;
+        }
+    }
+
+    public get currentUserValue() {
+        return this.currentUserSubject.value;
+    }
+
+
     login(email, password) {
         // console.log(` username ${email} with password ${password}`)
-        return this.http.post<any>(this.loginUrl,JSON.stringify({
+        return this.http.post<any>(urls.login_url ,JSON.stringify({
           "email":email,
           "password":password
         }), this.httpOptions)
             .pipe(map(key => {
-                let user : string = `{ email: ${email},key : ${JSON.stringify(key)}}`;
+              console.log(key);
+                let user : string = `{ "email" : "${email}", "key" : ${JSON.stringify(key['key'])}}`;
                 console.log("user --> "+user);
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                // localStorage.setItem('currentUser', user);
-                // this.currentUserSubject.next(user);
+                localStorage.setItem('currentUser', user);
+                this.currentUserSubject.next(user);
+                this.loggedIn = true;
                 return user;
             }));
     }

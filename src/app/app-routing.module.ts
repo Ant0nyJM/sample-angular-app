@@ -9,17 +9,22 @@ import { ProductViewComponent } from './product-view/product-view.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { AuthGuard } from './auth.guard';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 const routes: Routes = [
   { path : '', component : HomeComponent},
   { path : 'login', component : LoginComponent},
-  { path : 'secret', component : SecretPageComponent},
+  { path : 'secret', component : SecretPageComponent, canActivate : [AuthGuard]},
   { path : 'register', component : RegisterComponent},
   { path : 'products', component: ProductsComponent},
   { path : 'product/:productId', component: ProductViewComponent},
-  { path : 'cart', component: CartViewComponent},
-  { path : 'create-product', component: CreateProductComponent},
-  { path : 'product/:productId/edit', component : ProductEditComponent}
+  { path : 'cart', component: CartViewComponent, canActivate : [AuthGuard]},
+  { path : 'create-product', component: CreateProductComponent, canActivate : [AuthGuard]},
+  { path : 'product/:productId/edit', component : ProductEditComponent, canActivate : [AuthGuard]},
+  { path : 'profile', component : ProfileViewComponent, canActivate : [AuthGuard]},
+  { path : 'profile/edit', component : ProfileEditComponent, canActivate : [AuthGuard]}
 ];
 
 @NgModule({

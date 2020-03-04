@@ -40,7 +40,7 @@
                 <td>Rating</td>
                 <td>{{ product.rating }}</td>
             </tr>
-            <tr>
+            <tr *ngIf="loggedIn">
 
                 <td>
                     <button *ngIf="!addedToCart" id="shopping-cart" class="btn" title="Add to cart" (click)="addToCart()"><i class="fa fa-shopping-cart fa-2x" style="color: green;"></i></button>
@@ -54,6 +54,11 @@
 
                 </td>
                 
+            </tr>
+            <tr *ngIf="!loggedIn">
+              <td colspan="2">
+                <span>Login to add to cart</span>
+              </td>
             </tr>
          </table>
     </div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { ActivatedRoute, Router } from '@angular/router'; 
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router'; 
 import { CartService } from '../cart.service';
 import { Product } from '../product';
+import { AuthenticationService } from '../authentication.service';
 declare var $:any;
 
 @Component({
@@ -15,9 +16,14 @@ export class ProductViewComponent implements OnInit {
   productId : string;
   product: Product;
   addedToCart: boolean;
+  private state : RouterStateSnapshot;
 
   constructor(private productService : ProductService, private route : ActivatedRoute,
-     private cartService : CartService, private router: Router) { }
+     private cartService : CartService, private router: Router,
+     private authenticationService: AuthenticationService) {
+      
+      this.state = this.router.routerState.snapshot;
+      }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('productId');
@@ -58,6 +64,19 @@ export class ProductViewComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  public get loggedIn(): boolean{
+    if(this.authenticationService.currentUserValue){
+      return true;
+    }
+    
+    return false;
+
+  }
+
+  goToLogin(){
+    this.router.navigate(['/login'], { queryParams : {returnUrl : this.state.url}})
   }
 
 }

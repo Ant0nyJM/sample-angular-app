@@ -15,6 +15,8 @@ import { ProductViewComponent } from './product-view/product-view.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     CartViewComponent,
     CreateProductComponent,
     ProductEditComponent,
+    ProfileViewComponent,
+    ProfileEditComponent,
   ],
   imports: [
     BrowserModule,
