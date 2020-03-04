@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">SampleApp</a>
-    <ul class="navbar-nav flex-fill flex-row-reverse">
+    <ul id="#navlinks" class="nav navbar-nav navbar-right">
         <li class="nav-item">
 
             <a *ngIf="!this.authenticationService.loggedIn" class="nav-link" routerLink="/login">Login</a>
@@ -16,6 +16,10 @@
 
         <li class="nav-item">
             <a class="nav-link" routerLink="/products">Products</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/create-product">Add Product</a>
         </li>
     </ul>
 </nav>

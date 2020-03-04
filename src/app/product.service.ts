@@ -42,6 +42,35 @@ export class ProductService {
     );
   }
 
+  createProduct(formData : FormData){
+
+    return this.http.post( urls.create_product, formData)
+    .pipe( map( key => {
+      return key;
+    }));
+  }
+
+  editProduct(id : string, formData : FormData){
+
+    return this.http.put(urls.edit_product.replace('{id}',id), formData)
+    .pipe( map(
+      key => {
+        return key;
+      }
+    ))
+
+  }
+
+  deleteProduct(id : string){
+    return this.http.delete(urls.delete_product.replace('{id}',id))
+    .pipe(map(
+      key =>{
+        return key;
+      }
+    ));
+
+  }
+
 
 
 

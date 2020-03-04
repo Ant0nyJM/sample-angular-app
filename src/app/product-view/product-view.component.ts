@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
 import { CartService } from '../cart.service';
 import { Product } from '../product';
+declare var $:any;
 
 @Component({
   selector: 'app-product-view',
@@ -15,7 +16,8 @@ export class ProductViewComponent implements OnInit {
   product: Product;
   addedToCart: boolean;
 
-  constructor(private productService : ProductService, private route : ActivatedRoute, private cartService : CartService) { }
+  constructor(private productService : ProductService, private route : ActivatedRoute,
+     private cartService : CartService, private router: Router) { }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('productId');
@@ -28,9 +30,6 @@ export class ProductViewComponent implements OnInit {
         console.log(error);
       }
     );
-
-    
-
   }
 
   addToCart(){
@@ -45,6 +44,20 @@ export class ProductViewComponent implements OnInit {
     if(this.cartService.removeFromCart(this.product)){
       this.addedToCart = false;
     }
+  }
+
+  deleteProduct(){
+    this.productService.deleteProduct(this.product.id.toString())
+    .subscribe(
+      data => {
+        console.log(data);
+        $("#deleteModal").modal('hide');
+        this.router.navigate(['/products']);
+      },
+      error =>{
+        console.log(error);
+      }
+    );
   }
 
 }
