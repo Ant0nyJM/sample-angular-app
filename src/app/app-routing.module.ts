@@ -12,6 +12,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AuthGuard } from './auth.guard';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 const routes: Routes = [
   { path : '', component : HomeComponent},
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path : 'create-product', component: CreateProductComponent, canActivate : [AuthGuard]},
   { path : 'product/:productId/edit', component : ProductEditComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileViewComponent, canActivate : [AuthGuard]},
-  { path : 'profile/edit', component : ProfileEditComponent, canActivate : [AuthGuard]}
+  { path : 'profile/edit', component : ProfileEditComponent, canActivate : [AuthGuard]},
+  { path : 'profile/change-password', component : PasswordChangeComponent}
 ];
 
 @NgModule({

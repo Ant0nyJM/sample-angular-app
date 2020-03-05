@@ -17,6 +17,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
     ProductEditComponent,
     ProfileViewComponent,
     ProfileEditComponent,
+    PasswordChangeComponent,
   ],
   imports: [
     BrowserModule,

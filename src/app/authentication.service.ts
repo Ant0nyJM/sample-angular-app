@@ -8,8 +8,8 @@ import { urls } from './urls.json'
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
-    private currentUserSubject: BehaviorSubject<any>;
-    public currentUser: Observable<any>;
+    private currentUserSubject: BehaviorSubject<JSON>;
+    public currentUser: Observable<JSON>;
 
     public loggedIn : boolean;
 
@@ -20,7 +20,7 @@ export class AuthenticationService {
     };
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUserSubject = new BehaviorSubject<JSON>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
         if(this.currentUserSubject.value){
           this.loggedIn = true;
@@ -36,18 +36,15 @@ export class AuthenticationService {
 
 
     login(email, password) {
-        // console.log(` username ${email} with password ${password}`)
-        return this.http.post<any>(urls.login_url ,JSON.stringify({
+
+        return this.http.post<JSON>(urls.login_url ,JSON.stringify({
           "email":email,
           "password":password
         }), this.httpOptions)
             .pipe(map(key => {
-              console.log(key);
-                let user : string = `{ "email" : "${email}", "key" : ${JSON.stringify(key['key'])}}`;
-                console.log("user --> "+user);
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                let user : string = `{ "email" : "${email}", "key" : ${JSON.stringify(key['key'])} }`;
                 localStorage.setItem('currentUser', user);
-                this.currentUserSubject.next(user);
+                this.currentUserSubject.next(JSON.parse(user));
                 this.loggedIn = true;
                 return user;
             }));

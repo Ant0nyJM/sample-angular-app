@@ -19,7 +19,6 @@ export class ProfileService {
       data =>{
         let key = this.authenticationService.currentUserValue['key'];
         this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `Token ${key}`);
-        console.log(this.httpOptions.headers);
       }
     )
     
@@ -35,7 +34,6 @@ export class ProfileService {
   }
 
   editProfile(bodyParams){
-    console.log(bodyParams)
     return this.http.patch<JSON>(urls.profile_url,bodyParams , this.httpOptions).pipe(
       map(
         key => {
@@ -45,5 +43,15 @@ export class ProfileService {
     );
   }
 
+
+  changePassword(bodyParams){
+    return this.http.post<JSON>(urls.password_change_url, JSON.stringify(bodyParams), this.httpOptions).pipe(
+      map(
+        key =>{
+          return key;
+        }
+      )
+    );
+  }
 
 }

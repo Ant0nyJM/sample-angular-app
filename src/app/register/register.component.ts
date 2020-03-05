@@ -40,14 +40,10 @@ export class RegisterComponent implements OnInit {
     
     this.submitted = true;
     if(this.registrationForm.invalid){
-      console.log(this.f.email.errors);
-      console.log("Form Invalid")
       return;
     }
 
     if(this.f.password1.value != this.f.password2.value){
-      console.log(this.f.errors);
-      console.log("bad pass")
       return;
     }
 
