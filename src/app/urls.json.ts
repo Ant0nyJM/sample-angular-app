@@ -6,5 +6,6 @@ export const urls = {
     edit_product : "https://angular-backend-sayone.herokuapp.com/api/v1/product/product/{id}/",
     delete_product : "https://angular-backend-sayone.herokuapp.com/api/v1/product/product/{id}/",
     profile_url : "https://angular-backend-sayone.herokuapp.com/api/v1/rest-auth/user/",
-    password_change_url : "https://angular-backend-sayone.herokuapp.com/api/v1/rest-auth/password/change/"
+    password_change_url : "https://angular-backend-sayone.herokuapp.com/api/v1/rest-auth/password/change/",
+    orders_url : "https://angular-backend-sayone.herokuapp.com/api/v1/product/orders/"
 }

@@ -56,7 +56,6 @@ export class ProductViewComponent implements OnInit {
     this.productService.deleteProduct(this.product.id.toString())
     .subscribe(
       data => {
-        console.log(data);
         $("#deleteModal").modal('hide');
         this.router.navigate(['/products']);
       },

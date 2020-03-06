@@ -17,8 +17,11 @@ export class ProfileService {
   constructor(private http: HttpClient, private authenticationService : AuthenticationService) { 
     this.authenticationService.currentUser.subscribe(
       data =>{
+        if(this.authenticationService.currentUserValue){
         let key = this.authenticationService.currentUserValue['key'];
+        console.log("Prof service --> "+key);
         this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `Token ${key}`);
+      }
       }
     )
     
@@ -28,6 +31,9 @@ export class ProfileService {
   getProfile(){
     return this.http.get<JSON>(urls.profile_url, this.httpOptions).pipe(map(
       key => {
+        let locdata = localStorage.getItem('currentUser').replace('}',`, "username" : "${key['first_name']}" , "user_id" : "${key['pk']}" }`);
+        // console.log(JSON.stringify(locdata))
+        localStorage.setItem('currentUser', locdata);
         return key;
       }
     ));

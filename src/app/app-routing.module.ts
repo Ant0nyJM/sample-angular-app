@@ -13,6 +13,7 @@ import { AuthGuard } from './auth.guard';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 const routes: Routes = [
   { path : '', component : HomeComponent},
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path : 'product/:productId/edit', component : ProductEditComponent, canActivate : [AuthGuard]},
   { path : 'profile', component : ProfileViewComponent, canActivate : [AuthGuard]},
   { path : 'profile/edit', component : ProfileEditComponent, canActivate : [AuthGuard]},
-  { path : 'profile/change-password', component : PasswordChangeComponent}
+  { path : 'profile/change-password', component : PasswordChangeComponent, canActivate : [AuthGuard]},
+  { path : 'orders', component : OrderHistoryComponent, canActivate : [AuthGuard]}
 ];
 
 @NgModule({

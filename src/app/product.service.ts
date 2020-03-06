@@ -25,7 +25,6 @@ export class ProductService {
     this.httpOptions['params'] = params;
     return this.http.get<Product[]>( urls.get_products, this.httpOptions ).pipe(
       map( key =>{
-        // console.log(key);
         return key;
       })
     );
@@ -40,6 +39,18 @@ export class ProductService {
         return key;
       })
     );
+  }
+
+  promiseGetProduct(id){
+
+    return this.http.get<Product>( urls.get_product.replace('{id}',id.toString()), this.httpOptions).pipe(
+      map(
+        key => {
+          return key;
+        }
+      )
+    )
+    .toPromise();
   }
 
   createProduct(formData : FormData){

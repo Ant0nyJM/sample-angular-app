@@ -14,9 +14,8 @@ export class ProfileViewComponent implements OnInit {
   ngOnInit(): void {
       this.profileService.getProfile().subscribe(
         data => {
-          console.log("Data");
-          console.log(data);
           this.profile = data;
+          
         },
         error => {
           console.log(error);

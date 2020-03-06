@@ -6,3 +6,9 @@ export interface Product {
     image : string;
     rating : number;
 }
+
+export interface Order {
+    id : number;
+    date : string;
+    products : Array<string>;
+}

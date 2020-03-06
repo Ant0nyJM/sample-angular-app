@@ -1,0 +1,11 @@
+<div class="col-8 mx-auto"  *ngIf="orders">
+    <div class="card" *ngFor="let order of orders">
+        <div class="card-header">
+            Order  (Id #{{ order.id }}) - {{ order.date | date:"dd/MM/yyyy" }}
+        </div>    
+        <div class="card-body">
+            Items - {{ order.products}}
+        </div>
+    </div>
+
+</div>

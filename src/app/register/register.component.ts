@@ -57,8 +57,6 @@ export class RegisterComponent implements OnInit {
         error =>{
           this.error_messages = error.error;
           this.error_str = JSON.stringify(this.error_messages);
-          console.log(typeof(this.error_messages));
-          console.log(this.error_messages);
         }
       );
 

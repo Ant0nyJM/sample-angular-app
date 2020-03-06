@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AuthenticationService } from '../authentication.service'
+import { AuthenticationService } from '../authentication.service';
+import { ProfileService } from '../profile.service';
 
 @Component({
   templateUrl: 'login.component.html',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private profileService : ProfileService
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) { 
@@ -65,6 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             .subscribe(
                 data => {
                   console.log(data);
+                  this.profileService.getProfile().subscribe();
                   this.router.navigate([this.returnUrl]);
                 },
                 error => {

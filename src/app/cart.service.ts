@@ -9,6 +9,8 @@ export class CartService {
   products : Array<Product>;
   productIds : Array<number>;
 
+
+
   constructor() {
     if(localStorage.getItem('cartItems') != null && localStorage.getItem('productIds') != null){
       this.products = JSON.parse(localStorage.getItem('cartItems'));
