@@ -12,9 +12,11 @@ export class ProfileEditComponent implements OnInit {
 
     submitted : boolean;
     profileEditForm : FormGroup;
+    editSuccess : boolean;
 
   constructor(private profileService : ProfileService, private formBuilder : FormBuilder, private router : Router) {
     this.submitted = false;
+    this.editSuccess = true;
    }
 
   ngOnInit(): void {
@@ -40,16 +42,21 @@ export class ProfileEditComponent implements OnInit {
 
     this.profileService.editProfile(bodyParams).subscribe(
       data => {
-        this.router.navigate(['/profile']);
+        this.submitted = true;
+        this.editSuccess = true;
+        setTimeout(() => {
+          this.router.navigate(['/profile']);
+         }, 2000);
+        
       },
       error =>{
-        console.log(error);
+        this.submitted = true;
+        this.editSuccess = false;
       }
     );
   }
 
   onSubmit(){
-    this.submitted = true;
     this.editProfile(this.f.firstName.value, this.f.lastName.value)
   }
 

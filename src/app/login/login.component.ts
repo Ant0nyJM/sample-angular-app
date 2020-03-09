@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     loading = false;
     submitted = false;
     returnUrl: string;
-    error: string;
+    error: JSON;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 },
                 error => {
                     
-                    this.error = JSON.stringify(error.error);
+                    this.error = error.error;
                     this.loading = false;
                 },
                );

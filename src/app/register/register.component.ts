@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   genders = ['Male', 'Female'];
   submitted = false;
   regSuccess = false;
+  dataReturn : boolean;
   error_messages : JSON;
   error_str: string;
 
@@ -22,6 +23,8 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registrationForm.controls; }
 
   ngOnInit(): void {
+
+    this.dataReturn = false;
 
     this.registrationForm = this.formBuilder.group({
       email : ['', Validators.required],
@@ -52,9 +55,12 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data =>{
+          this.dataReturn  = true;
           this.regSuccess = true;
         },
         error =>{
+          this.dataReturn  = true;
+          this.regSuccess = false;
           this.error_messages = error.error;
           this.error_str = JSON.stringify(this.error_messages);
         }

@@ -9,6 +9,9 @@ import { ProfileService } from '../profile.service';
 export class PasswordChangeComponent implements OnInit {
 
   submitted : boolean;
+  editSuccess : boolean;
+  dataReturn : boolean;
+  formErrors : JSON;
   passwordChangeForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private profileService : ProfileService) { }
 
@@ -17,8 +20,9 @@ export class PasswordChangeComponent implements OnInit {
       password1 : ['', Validators.required],
       password2 : ['', Validators.required]
     });
-
+    this.editSuccess = false;
     this.submitted = false;
+    this.dataReturn = false;
   }
 
     public get f(){
@@ -28,20 +32,25 @@ export class PasswordChangeComponent implements OnInit {
     let bodyParams = { "new_password1":pass1, "new_password2":pass2};
     this.profileService.changePassword(bodyParams).subscribe(
       data => {
-        console.log("Success");
-        console.log(data);
+        this.dataReturn = true;
+        this.editSuccess = true;
       },
       error => {
-        console.log(error);
+        this.dataReturn = true;
+        this.editSuccess = false;
+        this.formErrors = error.error;
       }
     );
   }
   onSubmit(){
-
+    this.submitted = true;
+    this.dataReturn = false;
+    this.formErrors = JSON.parse("{}");
     if(this.passwordChangeForm.invalid){
       return;
     }
 
+    
     this.changePassword(this.f.password1.value, this.f.password2.value);
   }
 

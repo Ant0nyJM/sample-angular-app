@@ -1,7 +1,12 @@
 <div class="col-6 offset-3">
     <div id="form-message">
-        <div *ngIf="regSuccess && submitted">
-            Account created successfully
+        <div *ngIf="submitted">
+            <div *ngIf="dataReturn && !regSuccess" class="alert alert-danger" role="alert">
+                Account creation was successfull
+            </div>
+            <div *ngIf="dataReturn && regSuccess" class="alert alert-success" role="alert">
+                Account creation was unsuccessfull
+            </div>
         </div>
     </div>
 
